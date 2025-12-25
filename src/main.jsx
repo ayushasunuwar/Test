@@ -126,9 +126,72 @@ import { Heading1 } from 'lucide-react';
 
 //Form
 function MyForm(){
+  // const [name, setName] = useState("Suresh");
+  const [mytxt, setMytxt] = useState("");
+  const [myCar, setMyCar] = useState("");
+  const [inputs, setInputs] = useState({
+    firstname: 'Suresh',
+    lastname: 'Lama'
+  });
+
+  function handleNameChange(e){
+    setName(e.target.value);
+  }
+
+  function handleTextareaChange(e){
+    setMytxt(e.target.value);
+  }
+
+  const handleMycarChange = (event) => {
+    setMyCar(event.target.value);
+  }
+
+  const handleInputsChange = (e) =>{
+    const name = e.target.name;
+    const value = e.target.value;
+    setInputs(values => ({...values, [name]: value}));
+
+  }
+
+  function handleSubmit(e){
+    e.preventDefault();
+    alert(name);
+  }
+
   return(
-    <form action="">
-      <label>Enter your name: <input type="text" /></label>
+    <form action="" onSubmit={handleSubmit}>
+      {/* <label>Enter your name: 
+      <input type="text" value={name} onChange={handleNameChange} />
+      </label>
+      <p>Current name: {name}</p> */}
+
+      <label htmlFor="">
+        First name: 
+        <input type="text" name="firstname" value={inputs.firstname} onChange={handleInputsChange} />
+      </label>
+
+      <label htmlFor="">
+        Last name:
+        <input type="text" name="lastname" value={inputs.lastname} onChange={handleInputsChange}/>
+      </label>
+
+      <p>Current values: {inputs.firstname} {inputs.lastname}</p>
+      <br /><br />
+
+      <label htmlFor="">
+        Write here: <textarea value={mytxt} onChange={handleTextareaChange}></textarea>
+      </label>
+      <p>Current Value: {mytxt}</p>
+      <br />
+
+      <select value={myCar} onChange={handleMycarChange}>
+        <option value="Ford">Ford</option>
+        <option value="Volvo">Volvo</option>
+        <option value="Fiat">Fiat</option>
+      </select>
+      <br />
+      
+      <input type="submit" />
     </form>
   );
 }
